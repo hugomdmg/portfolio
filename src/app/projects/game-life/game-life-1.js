@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react"
 import Draw from '../../infraestructure/draw'
+import Help from "../../help"
 
 
 export default function GameOfLife1() {
@@ -17,6 +18,7 @@ export default function GameOfLife1() {
         }
     }
     let cells = []
+    let helpText = 'the initial state of the points is aleatory. Sometimes nothing will happen, if so, reload the page.'
 
 
     for (let i = 1; i < 50; i++) {
@@ -72,8 +74,11 @@ export default function GameOfLife1() {
     })
 
     return (
-        <div id='scenary-container'>
-            <canvas id="scenary-life" ref={canvasRef} width='1000' height='600'></canvas>
-        </div>
+        <>
+            <Help text={helpText}/>
+            <div id='scenary-container'>
+                <canvas id="scenary-life" ref={canvasRef} width='1000' height='600'></canvas>
+            </div>
+        </>
     )
 }

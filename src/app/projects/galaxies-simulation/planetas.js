@@ -3,6 +3,7 @@ import Dinamics from '../../infraestructure/dinamics'
 import Gravity from "../../infraestructure/gravity";
 import Draw from "../../infraestructure/draw";
 import Galaxy from "./galaxies";
+import Help from "../../help";
 
 let dinamics = new Dinamics()
 let gravity = new Gravity(0.000001)
@@ -10,6 +11,7 @@ gravity.t = 2
 gravity.type = 'galaxy'
 let galaxy = new Galaxy()
 let draw = new Draw()
+let helpText = 'Use W, S to rotate up and down. Use A, D to rotate left and right. Use Z, X to change time speed'
 
 
 function events(planetas) {
@@ -66,7 +68,7 @@ function Planets(props) {
 
   return (
     <>
-    <p></p>
+    <Help text={helpText}/>
       <div className="datos">
         {planetTable1}
         {planetTable2}

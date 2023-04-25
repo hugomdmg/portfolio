@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react'
 import Dinamics from '../../infraestructure/dinamics'
 import Draw from '../../infraestructure/draw'
 import './lissajaus.css'
+import Help from '../../help'
 
 
 function Lissajaus() {
@@ -9,6 +10,7 @@ function Lissajaus() {
     let draw = new Draw()
     draw.minDistance = 3000
     let control = true
+    let helpText = 'Once the line is green, use W, S to rotate up and down. Use A, D to rotate left and right. You will can see the both waves from different perspectives.'
 
     let A1 = 70
     let A2 = 50
@@ -58,6 +60,7 @@ function Lissajaus() {
 
     return (
         <>
+            <Help text={helpText} />
             <form id='form'>
                 <label>Amplitude 1</label>
                 <input type='text' id='amplitud1' placeholder={A1} />

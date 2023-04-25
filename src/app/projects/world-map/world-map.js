@@ -4,6 +4,7 @@ import Earth from "../../../shared/earth";
 import Dinamics from '../../infraestructure/dinamics'
 import Projection from '../../infraestructure/projection'
 import './style.css'
+import Help from "../../help";
 
 function WorldMap() {
     const canvasRef = useRef(null)
@@ -13,6 +14,7 @@ function WorldMap() {
     let projection = new Projection()
     draw.minDistance = 180
 
+    let helpText = 'Use W, S to rotate latitud. Use A, D to rotate longitud.'
 
     let cartesianCoordenates = projection.convertToCartesians(earth.continents)
 
@@ -22,7 +24,7 @@ function WorldMap() {
                 cartesianCoordenates = dinamics.rotateYAxis(-0.1, cartesianCoordenates)
                 earth.continents = projection.convertToSpherics(cartesianCoordenates)
             }
-            if (event.key == "s")  {
+            if (event.key == "s") {
                 cartesianCoordenates = dinamics.rotateYAxis(0.1, cartesianCoordenates)
                 earth.continents = projection.convertToSpherics(cartesianCoordenates)
             }
@@ -58,9 +60,12 @@ function WorldMap() {
     })
 
     return (
-        <div id='scenary-container'>
-            <canvas id="scenary" ref={canvasRef} width='2000' height='900'></canvas>
-        </div>
+        <>
+        <Help text={helpText}/>
+            <div id='scenary-container'>
+                <canvas id="scenary" ref={canvasRef} width='2000' height='900'></canvas>
+            </div>
+        </>
     )
 }
 

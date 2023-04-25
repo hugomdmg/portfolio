@@ -2,3 +2,7 @@
     background-color: black;
     width: 60%;
 }
+
+#waiting-warning{
+    color: rgb(255, 99, 96);
+}

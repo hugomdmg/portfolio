@@ -1,5 +1,5 @@
 import './gis.css'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Draw from '../../infraestructure/draw'
 
 function GisMap() {
@@ -7,6 +7,7 @@ function GisMap() {
   let zBase = 0
   let control = 0
   let draw = new Draw()
+  let [loadingMessage, setLoadingMessage] = useState('')
 
   function parseCSV(text) {
     let lines = text.replace(/\r/g, '').split('\n');
@@ -17,6 +18,7 @@ function GisMap() {
   }
 
   function readFile(evt) {
+    setLoadingMessage(<p id='waiting-warning'>Creating map...</p>)
     control = 0
     let data
     let file = evt.target.files[0];
@@ -26,6 +28,7 @@ function GisMap() {
       formatData(data)
     };
     reader.readAsBinaryString(file);
+
   }
 
   function formatData(data) {
@@ -68,6 +71,7 @@ function GisMap() {
         formatedData.forEach((point) => {
           draw.paintPoint(point.position, 2, point.rgba)
         })
+        setLoadingMessage('')
       }
     }, 50)
   })
@@ -88,7 +92,7 @@ function GisMap() {
       {/* <button onClick={()=>{readExample('./lidar/PNOA_penalara.csv')}}>Mount Penalara</button>
       <button onClick={()=>{readExample('./lidar/PNOA_matalascanas.csv')}}>Matalascanas dunes</button>
       <button onClick={()=>{readExample('./lidar/PNOA_duraton.csv')}}>Duraton river</button> */}
-
+      {loadingMessage}
       <div id='scenary-container'>
         <canvas id='gis-scenary' ref={canvasRef} width='3000' height='2000'></canvas>
       </div>

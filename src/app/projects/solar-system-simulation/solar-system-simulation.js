@@ -3,6 +3,7 @@ import './scenary.css'
 import CreateUniverse from './createUniverse';
 import Earth from '../../../shared/earth'
 import Planet from './planets';
+import Help from '../../help';
 
 
 
@@ -16,6 +17,7 @@ export default function SolarSystemSimulation() {
     let planets = [planet, moon, planet3]
     const canvasRef = useRef(null)
     let draw = new CreateUniverse(planets)
+    let helpText = 'Use J, K, L, I to move center. Use W, S to rotate up and down. Use Z, X to change time speed'
 
     useEffect(() => {
         let canvas = canvasRef.current
@@ -23,8 +25,11 @@ export default function SolarSystemSimulation() {
     })
 
     return (
-        <div id='scenary-container'>
-            <canvas id="scenary" ref={canvasRef} width='2000' height='900'></canvas>
-        </div>
+        <>
+            <Help text={helpText} />
+            <div id='scenary-container'>
+                <canvas id="scenary" ref={canvasRef} width='2000' height='900'></canvas>
+            </div>
+        </>
     )
 }
