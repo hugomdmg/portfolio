@@ -15,7 +15,7 @@ function ProjectCardDescriptions() {
               <Card.Img class='card-images' variant="top" src={`images-app/${project.link}.png`} />
               <Card.Title>{project.name}</Card.Title>
               <Card.Text>
-                With supporting text below as a natural lead-in to additional content.
+                {project.description}
               </Card.Text>
               <Link to={project.link}>go</Link>
             </Card.Body>

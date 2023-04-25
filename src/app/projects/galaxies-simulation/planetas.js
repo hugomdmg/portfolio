@@ -66,6 +66,7 @@ function Planets(props) {
 
   return (
     <>
+    <p></p>
       <div className="datos">
         {planetTable1}
         {planetTable2}
