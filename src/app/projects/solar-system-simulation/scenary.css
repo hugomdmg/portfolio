@@ -1,0 +1,9 @@
+#scenary{
+    background-color: black;
+    width: 90%;
+}
+
+#scenary-container{
+    display: flex;
+    justify-content: center;
+}

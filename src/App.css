@@ -1,0 +1,8 @@
+.pdfContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.card-images{
+    width: 60%;
+  }

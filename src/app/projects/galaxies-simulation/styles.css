@@ -1,0 +1,35 @@
+#cuadro{
+  padding-top: 1%;
+  display: flex;
+  justify-content: center;
+}
+
+#canvasSimulacion{
+  background-color: rgb(41, 38, 38);
+  width: 95%;
+}
+
+#canvasInicio{
+  margin-top: 10ch;
+  background-color: rgb(41, 38, 38);
+  width: 50%;
+  height: 80%;
+}
+
+#cuadroInicio{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.datos{
+  background-color: rgb(248, 184, 131);
+  border: 0.5px solid rgb(243, 151, 13);
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  opacity: 0.3;
+  position: fixed;
+  margin-top: 6ch;
+  margin-left: 8ch;
+}
