@@ -17,10 +17,10 @@ let navLinks = [
     name: 'GitHub',
     link: '',
   },
-  {
-    name: 'CV',
-    link: 'cv',
-  },
+  // {
+  //   name: 'CV',
+  //   link: 'cv',
+  // },
 ]
 
 
