@@ -85,9 +85,21 @@ function GisMap() {
       })
   }
 
+  function shadowMap() {
+    formatedData = formatedData.map((point, index) => {
+    if (formatedData[index - 1]) {
+    let rgba = (point.position.z - formatedData[index - 1].position.z + 3) * 30
+    rgba = `rgba(${rgba}, ${rgba}, ${rgba})`
+    point.rgba = rgba
+    }
+    return point
+    })
+    }
+
   return (
     <>
       <input type="file" id="file" accept=".csv" onChange={readFile} />
+      <button onClick={shadowMap}>shadow map</button>
       <a href='https://drive.google.com/drive/folders/1CF1brNlwK4JxygXfihcKERXsrzqHFQpc?usp=share_link'>download examples</a>
       {/* <button onClick={()=>{readExample('./lidar/PNOA_penalara.csv')}}>Mount Penalara</button>
       <button onClick={()=>{readExample('./lidar/PNOA_matalascanas.csv')}}>Matalascanas dunes</button>
