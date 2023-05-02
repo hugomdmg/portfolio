@@ -54,8 +54,8 @@ function GisMap() {
       if (index % 4 == 0) {
         formatedData.push({
           position: {
-            x: ((point[1] - data[1][1]) + 100),
-            y: ((point[2] - data[1][2]) + 2000),
+            x: ((point[1] - data[1][1]) + 400),
+            y: -((point[2] - data[1][2])),
             z: parseInt(point[3])
           },
           rgba: rgba
