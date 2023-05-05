@@ -1,48 +1,36 @@
 import { useState } from "react";
 
 function Tabla(props) {
-  let [radioNucleo, setRadioNucleo] = useState(props.planeta[0]);
-  let [densidadNucleo, setDensidadNucleo] = useState(props.planeta[3]);
-
-  let [radioManto, setRadioManto] = useState(props.planeta[1]);
-  let [densidadManto, setDensidadManto] = useState(props.planeta[4]);
-
-  let [radioCorteza, setRadioCorteza] = useState(props.planeta[2]);
-  let [densidadCorteza, setDensidadCorteza] = useState(props.planeta[5]);
 
   let datos = {
-    nucleo: { r: radioNucleo, d: densidadNucleo },
-    manto: { r: radioManto, d: densidadManto },
-    corteza: { r: radioCorteza, d: densidadCorteza },
+    nucleo: { r: props.planeta[0], d: props.planeta[3] },
+    manto: { r: props.planeta[1], d: props.planeta[4] },
+    corteza: { r: props.planeta[2], d: props.planeta[5] },
     velocidad: {
       x: (props.v * Math.cos(props.angulo)) / 1000,
       y: (-props.v * Math.sin(props.angulo)) / 1000,
     },
   };
 
-  function actualizar() {
-    datos = {
-      nucleo: { r: radioNucleo, d: densidadNucleo },
-      manto: { r: radioManto, d: densidadManto },
-      corteza: { r: radioCorteza, d: densidadCorteza },
-      velocidad: {
-        x: (props.v * Math.cos(props.angulo)) / 1000,
-        y: (-props.v * Math.sin(props.angulo)) / 1000,
-      },
-    };
+  let actualizar = (value, key1, key2) => {
+    datos[key1][key2] = value
     props.funcion(datos);
   }
-  let boton = ()=>{
-    return(
+  let boton = () => {
+    return (
       <>
-      <button onClick={()=>{
-        setRadioNucleo(0);
-        setDensidadNucleo(0);
-        setRadioManto(0);
-        setDensidadManto(0);
-        setRadioCorteza(0);
-        setDensidadCorteza(0);
-      }}>blackhole mode</button>
+        <button onClick={() => {
+          let datos = {
+            nucleo: { r: 0, d: 0},
+            manto: { r: 0, d: 0 },
+            corteza: { r: 0, d: 0},
+            velocidad: {
+              x: (props.v * Math.cos(props.angulo)) / 1000,
+              y: (-props.v * Math.sin(props.angulo)) / 1000,
+            },
+          };
+          props.funcion(datos);
+        }}>blackhole mode</button>
       </>
     )
   }
@@ -51,99 +39,87 @@ function Tabla(props) {
   return (
     <>
       <div>
-        <h3>Datos del {props.nombre} planeta:</h3>
+        <h3>Galaxie {props.nombre}:</h3>
         {bot}
         <table id="tabla">
           <tbody>
-          <tr>
-            <td></td>
-            <td>Radio (km)</td>
-            <td>densidad (g/cm3)</td>
-          </tr>
-          <tr>
-            <td>Nucleo</td>
-            <td>
-              <input
-                type="text"
-                value={radioNucleo}
-                onChange={(e) => {
-                  setRadioNucleo(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[0]}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                value={densidadNucleo}
-                onChange={(e) => {
-                  setDensidadNucleo(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[3]}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Manto</td>
-            <td>
-              <input
-                type="text"
-                value={radioManto}
-                onChange={(e) => {
-                  setRadioManto(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[1]}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                value={densidadManto}
-                onChange={(e) => {
-                  setDensidadManto(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[4]}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Corteza</td>
-            <td>
-              <input
-                type="text"
-                value={radioCorteza}
-                onChange={(e) => {
-                  setRadioCorteza(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[2]}
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                value={densidadCorteza}
-                onChange={(e) => {
-                  setDensidadCorteza(e.target.value);
-                  actualizar();
-                }}
-                placeholder={props.planeta[5]}
-              />
-            </td>
-          </tr>
+            <tr>
+              <td></td>
+              <td>Radius (km)</td>
+              <td>density (g/cm3)</td>
+            </tr>
+            <tr>
+              <td>Core</td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.nucleo.r}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'nucleo', 'r');
+                  }}
+                  placeholder={props.planeta[0]}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.nucleo.d}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'nucleo', 'd');
+                  }}
+                  placeholder={props.planeta[3]}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Mantle</td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.manto.r}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'manto', 'r');
+
+                  }}
+                  placeholder={props.planeta[1]}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.manto.d}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'manto', 'd');
+                  }}
+                  placeholder={props.planeta[4]}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Crust</td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.corteza.r}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'corteza', 'r');
+                  }}
+                  placeholder={props.planeta[2]}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value={datos.corteza.d}
+                  onChange={(e) => {
+                    actualizar(e.target.value, 'conrteza', 'd');
+                  }}
+                  placeholder={props.planeta[5]}
+                />
+              </td>
+            </tr>
           </tbody>
         </table>
-        <button
-          onClick={() => {
-            actualizar();
-          }}
-        >
-          watch
-        </button>
       </div>
       <div></div>
     </>

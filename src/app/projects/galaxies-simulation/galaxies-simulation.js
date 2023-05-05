@@ -94,21 +94,21 @@ export default function GalaxiesSimulation() {
       <div id="cuadroInicio">
         <div>
           <Tabla
-            nombre="primer"
+            nombre="1"
             funcion={setPlaneta1}
             planeta={arrayPlaneta1}
             angulo={0}
             v={0}
           />
           <Tabla
-            nombre="segundo"
+            nombre="2"
             funcion={setPlaneta2}
             planeta={arrayPlaneta2}
             angulo={angulo - Math.PI / 2}
             v={v}
           />
           <table>
-            <p>Velocidad relativa:</p>
+            <p>Relative velocity:</p>
             <tr>
               <td>
                 <input
@@ -119,7 +119,7 @@ export default function GalaxiesSimulation() {
                 ></input>
               </td>
             </tr>
-            <p>Ángulo de impacto:</p>
+            <p>Impact angle:</p>
             <tr>
               <td>
                 <input
@@ -154,13 +154,7 @@ export default function GalaxiesSimulation() {
   } else {
     return (
       <>
-        <button
-          onClick={() => {
-            setControl(true);
-          }}
-        >
-          {"<atrás"}
-        </button>
+        <button onClick={() => { window.location.reload(false) }}>go back</button>
         <Planets planeta1={planeta1} planeta2={planeta2} />
       </>
     );
