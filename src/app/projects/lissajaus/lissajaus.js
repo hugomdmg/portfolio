@@ -69,7 +69,7 @@ function Lissajaus() {
                 <label>Phase difference</label>
                 <input id='phase' placeholder={phase} />
             </form>
-            <button onClick={show}>Ver</button>
+            <button onClick={show}>View</button>
             <div id='scenary-container'>
                 <canvas id="scenary" ref={canvasRef} width='2000' height='900'></canvas>
             </div>

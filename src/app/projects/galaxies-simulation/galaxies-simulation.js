@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import Tabla from "./tabla";
 import Planets from "./planetas";
 import './styles.css'
+import Draw from "../../infraestructure/draw";
 
 export default function GalaxiesSimulation() {
   let [control, setControl] = useState(true);
-  let [v, setV] = useState(15);
+  let [v, setV] = useState(0.015);
   let [angulo, setAngulo] = useState(4);
+  let draw = new Draw()
 
   let [planeta1, setPlaneta1] = useState({
     nucleo: { r: 3471, d: 12.1 },
@@ -18,73 +20,44 @@ export default function GalaxiesSimulation() {
     nucleo: { r: 1000, d: 0.02 },
     manto: { r: 2500, d: 0.04 },
     corteza: { r: 3475, d: 0.01 },
-    velocidad: { x: v * Math.cos(angulo), y: -v * Math.sin(angulo) },
+    velocidad: { x: v * Math.cos(angulo), y: v * Math.sin(angulo) },
   });
-
-  let arrayPlaneta1 = [
-    planeta1.nucleo.r,
-    planeta1.manto.r,
-    planeta1.corteza.r,
-    planeta1.nucleo.d,
-    planeta1.manto.d,
-    planeta1.corteza.d,
-  ];
-  let arrayPlaneta2 = [
-    planeta2.nucleo.r,
-    planeta2.manto.r,
-    planeta2.corteza.r,
-    planeta2.nucleo.d,
-    planeta2.manto.d,
-    planeta2.corteza.d,
-  ];
 
   function CuadroVisual(props) {
     const canvasRef1 = useRef(null);
 
-    function draw(ctx, r, color, x, y) {
-      ctx.beginPath();
-      ctx.strokeStyle = color;
-      ctx.fillStyle = color;
-      ctx.arc(x, y, r, 0, 7);
-      ctx.fill();
-      ctx.stroke();
-    }
-
-    function drawFlecha(ctx, x, y, alfa) {
+    function drawFlecha(draw, x, y, alfa) {
       let flecha = [
-        { x: 0, y: 0 },
+        { x: 15, y: 0 },
         { x: 34, y: 0 },
         { x: 31, y: 3 },
         { x: 31, y: -3 },
         { x: 34, y: 0 },
+        { x: 0, y: 0 },
       ];
       flecha = flecha.map((punto) => {
         let puntos = {
           x: Math.cos(alfa) * punto.x - Math.sin(alfa) * punto.y,
           y: Math.sin(alfa) * punto.x + Math.cos(alfa) * punto.y,
+          z: 1
         };
         return puntos;
       });
-      ctx.moveTo(x, y);
-      for (let i = 0; i < flecha.length; i++) {
-        ctx.lineTo(flecha[i].x + x, flecha[i].y + y);
-      }
-      ctx.lineWidth = "1";
-      ctx.strokeStyle = "brown";
-      ctx.stroke();
+      draw.paintLine(flecha, { x: x, y: y }, 0, 'brown')
     }
 
     useEffect(() => {
       const canvas = canvasRef1.current;
-      const context = canvas.getContext("2d");
+      draw.init(canvas)
 
-      draw(context, props.planeta2[2] / 200, "rgb(139, 163, 33)", 100, 100);
-      draw(context, props.planeta2[1] / 200, "rgb(231, 123, 22)", 100, 100);
-      draw(context, props.planeta2[0] / 200, "rgb(141, 12, 8)", 100, 100);
-      draw(context, props.planeta1[2] / 200, "rgb(139, 163, 33)", 200, 40);
-      draw(context, props.planeta1[1] / 200, "rgb(231, 123, 22)", 200, 40);
-      draw(context, props.planeta1[0] / 200, "rgb(141, 12, 8)", 200, 40);
-      drawFlecha(context, 100, 100, angulo);
+      draw.paintPoint({ x: 100, y: 100 }, props.planeta2.corteza.r / 200, "rgb(139, 163, 33)")
+      draw.paintPoint({ x: 100, y: 100 }, props.planeta2.manto.r / 200, "rgb(231, 123, 22)")
+      draw.paintPoint({ x: 100, y: 100 }, props.planeta2.nucleo.r / 200, "rgb(141, 12, 8)")
+      draw.paintPoint({ x: 200, y: 40 }, props.planeta1.corteza.r / 200, "rgb(139, 163, 33)")
+      draw.paintPoint({ x: 200, y: 40 }, props.planeta1.manto.r / 200, "rgb(231, 123, 22)")
+      draw.paintPoint({ x: 200, y: 40 }, props.planeta1.nucleo.r / 200, "rgb(141, 12, 8)")
+
+      drawFlecha(draw, 100, 100, angulo);
     });
     return <canvas id="canvasInicio" ref={canvasRef1} />;
   }
@@ -96,59 +69,46 @@ export default function GalaxiesSimulation() {
           <Tabla
             nombre="1"
             funcion={setPlaneta1}
-            planeta={arrayPlaneta1}
             angulo={0}
             v={0}
+            datos={planeta1}
           />
           <Tabla
             nombre="2"
             funcion={setPlaneta2}
-            planeta={arrayPlaneta2}
-            angulo={angulo - Math.PI / 2}
+            angulo={angulo}
             v={v}
+            datos={planeta2}
+
           />
+          <br></br>
           <table>
-            <p>Relative velocity:</p>
-            <tr>
-              <td>
-                <input
-                  onChange={(e) => {
-                    setV(e.target.value);
-                  }}
-                  placeholder={v}
-                ></input>
-              </td>
-            </tr>
-            <p>Impact angle:</p>
-            <tr>
-              <td>
-                <input
-                  onChange={(e) => {
-                    setAngulo(e.target.value);
-                  }}
-                  placeholder={angulo}
-                ></input>
-              </td>
-            </tr>
+            <tbody>
+              <tr><td>Relative velocity:</td></tr>
+              <tr>
+                <td>
+                  <input onChange={(e) => {
+                    planeta2.velocidad = { x: e.target.value * Math.cos(angulo) / 1000, y: e.target.value * Math.sin(angulo) / 1000 }
+                    setV(e.target.value / 1000)
+                    setPlaneta2(planeta2)
+                  }} placeholder={v * 1000}></input>
+                </td>
+              </tr>
+              <tr><td>Impact angle:</td></tr>
+              <tr>
+                <td>
+                  <input onChange={(e) => {
+                    planeta2.velocidad = { x: v * Math.cos(e.target.value), y: v * Math.sin(e.target.value) }
+                    setAngulo(e.target.value)
+                    setPlaneta2(planeta2)
+                  }} placeholder={angulo}></input>
+                </td>
+              </tr>
+            </tbody>
           </table>
-          <button
-            onClick={() => {
-              setControl(false);
-              setPlaneta2({
-                nucleo: { r: planeta2.nucleo.r, d: planeta2.nucleo.d },
-                manto: { r: planeta2.manto.r, d: planeta2.manto.d },
-                corteza: { r: planeta2.corteza.r, d: planeta2.corteza.d },
-                velocidad: {
-                  x: (v * Math.cos(angulo)) / 1000,
-                  y: (v * Math.sin(angulo)) / 1000,
-                },
-              });
-            }}
-          >
-            View simulation
-          </button>
+          <button onClick={() => { setControl(false) }}>View simulation</button>
         </div>
-        <CuadroVisual planeta1={arrayPlaneta1} planeta2={arrayPlaneta2} />
+        <CuadroVisual planeta1={planeta1} planeta2={planeta2} />
       </div>
     );
   } else {

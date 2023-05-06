@@ -1,32 +1,30 @@
-import { useState } from "react";
 
 function Tabla(props) {
 
-  let datos = {
-    nucleo: { r: props.planeta[0], d: props.planeta[3] },
-    manto: { r: props.planeta[1], d: props.planeta[4] },
-    corteza: { r: props.planeta[2], d: props.planeta[5] },
-    velocidad: {
-      x: (props.v * Math.cos(props.angulo)) / 1000,
-      y: (-props.v * Math.sin(props.angulo)) / 1000,
-    },
-  };
+  let datos = props.datos
 
   let actualizar = (value, key1, key2) => {
-    datos[key1][key2] = value
-    props.funcion(datos);
+    let datos1 = {
+      nucleo: { r: props.datos.nucleo.r, d: props.datos.nucleo.d },
+      manto: { r: props.datos.manto.r, d: props.datos.manto.d },
+      corteza: { r: props.datos.corteza.r, d: props.datos.corteza.d },
+      velocidad: props.datos.velocidad
+    };
+
+    datos1[key1][key2] = parseInt(value)
+    props.funcion(datos1)
   }
   let boton = () => {
     return (
       <>
         <button onClick={() => {
           let datos = {
-            nucleo: { r: 0, d: 0},
+            nucleo: { r: 0, d: 0 },
             manto: { r: 0, d: 0 },
-            corteza: { r: 0, d: 0},
+            corteza: { r: 0, d: 0 },
             velocidad: {
-              x: (props.v * Math.cos(props.angulo)) / 1000,
-              y: (-props.v * Math.sin(props.angulo)) / 1000,
+              x: (props.v * Math.cos(props.angulo)),
+              y: (props.v * Math.sin(props.angulo)),
             },
           };
           props.funcion(datos);
@@ -45,8 +43,8 @@ function Tabla(props) {
           <tbody>
             <tr>
               <td></td>
-              <td>Radius (km)</td>
-              <td>density (g/cm3)</td>
+              <td>Radius (light years)</td>
+              <td>density (mg/m3)</td>
             </tr>
             <tr>
               <td>Core</td>
@@ -57,7 +55,7 @@ function Tabla(props) {
                   onChange={(e) => {
                     actualizar(e.target.value, 'nucleo', 'r');
                   }}
-                  placeholder={props.planeta[0]}
+                  placeholder={props.datos.nucleo.r}
                 />
               </td>
               <td>
@@ -67,7 +65,7 @@ function Tabla(props) {
                   onChange={(e) => {
                     actualizar(e.target.value, 'nucleo', 'd');
                   }}
-                  placeholder={props.planeta[3]}
+                  placeholder={props.datos.nucleo.d}
                 />
               </td>
             </tr>
@@ -81,7 +79,7 @@ function Tabla(props) {
                     actualizar(e.target.value, 'manto', 'r');
 
                   }}
-                  placeholder={props.planeta[1]}
+                  placeholder={props.datos.manto.r}
                 />
               </td>
               <td>
@@ -91,7 +89,7 @@ function Tabla(props) {
                   onChange={(e) => {
                     actualizar(e.target.value, 'manto', 'd');
                   }}
-                  placeholder={props.planeta[4]}
+                  placeholder={props.datos.manto.d}
                 />
               </td>
             </tr>
@@ -104,7 +102,7 @@ function Tabla(props) {
                   onChange={(e) => {
                     actualizar(e.target.value, 'corteza', 'r');
                   }}
-                  placeholder={props.planeta[2]}
+                  placeholder={props.datos.corteza.r}
                 />
               </td>
               <td>
@@ -114,7 +112,7 @@ function Tabla(props) {
                   onChange={(e) => {
                     actualizar(e.target.value, 'conrteza', 'd');
                   }}
-                  placeholder={props.planeta[5]}
+                  placeholder={props.datos.corteza.d}
                 />
               </td>
             </tr>
