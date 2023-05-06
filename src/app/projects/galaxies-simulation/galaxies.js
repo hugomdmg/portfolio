@@ -3,11 +3,11 @@ export default class Galaxy {
   createGalaxy(galaxy, position) {
     let points = [];
     if (galaxy.nucleo.r !== 0) {
-      for (let i = 0; i < galaxy.corteza.r / 80; i += 25) {
+      for (let i = 0; i < (galaxy.corteza.r + 80 )/ 80; i += 20) {
         let color = "rgb(255, 125, 108)"
         let d = galaxy.corteza.d
-        if (i < galaxy.manto.r / 80 - 10) { color = "rgb(250, 255, 108)"; d = galaxy.manto.d }
-        if (i < galaxy.nucleo.r / 80) { color = "rgb(108, 135, 255)"; d = galaxy.nucleo.d }
+        if (i < galaxy.manto.r / 80 ) { color = "rgb(250, 255, 108)"; d = galaxy.manto.d }
+        if (i < galaxy.nucleo.r / 80 ) { color = "rgb(108, 135, 255)"; d = galaxy.nucleo.d }
         points.push({
           x: i,
           y: 0,
@@ -20,7 +20,7 @@ export default class Galaxy {
         });
       }
       let n = points.length;
-      for (let i = 0; i < 1; i += 0.15) {
+      for (let i = 0; i < 1; i += 0.2) {
         for (let j = 0; j < n; j++) {
           if (points[j].x > 0.1) {
             let pointsRotados = {

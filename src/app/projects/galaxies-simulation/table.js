@@ -1,24 +1,24 @@
 
-function Tabla(props) {
+function Table(props) {
 
-  let datos = props.datos
+  let data = props.data
 
-  let actualizar = (value, key1, key2) => {
-    let datos1 = {
-      nucleo: { r: props.datos.nucleo.r, d: props.datos.nucleo.d },
-      manto: { r: props.datos.manto.r, d: props.datos.manto.d },
-      corteza: { r: props.datos.corteza.r, d: props.datos.corteza.d },
-      velocidad: props.datos.velocidad
+  let upload = (value, key1, key2) => {
+    let data1 = {
+      nucleo: { r: props.data.nucleo.r, d: props.data.nucleo.d },
+      manto: { r: props.data.manto.r, d: props.data.manto.d },
+      corteza: { r: props.data.corteza.r, d: props.data.corteza.d },
+      velocidad: props.data.velocidad
     };
 
-    datos1[key1][key2] = parseInt(value)
-    props.funcion(datos1)
+    data1[key1][key2] = parseInt(value)
+    props.setPlaneta(data1)
   }
   let boton = () => {
     return (
       <>
         <button onClick={() => {
-          let datos = {
+          let data = {
             nucleo: { r: 0, d: 0 },
             manto: { r: 0, d: 0 },
             corteza: { r: 0, d: 0 },
@@ -27,7 +27,7 @@ function Tabla(props) {
               y: (props.v * Math.sin(props.angulo)),
             },
           };
-          props.funcion(datos);
+          props.setPlaneta(data);
         }}>blackhole mode</button>
       </>
     )
@@ -39,7 +39,7 @@ function Tabla(props) {
       <div>
         <h3>Galaxie {props.nombre}:</h3>
         {bot}
-        <table id="tabla">
+        <table id="table">
           <tbody>
             <tr>
               <td></td>
@@ -51,21 +51,21 @@ function Tabla(props) {
               <td>
                 <input
                   type="text"
-                  value={datos.nucleo.r}
+                  value={data.nucleo.r}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'nucleo', 'r');
+                    upload(e.target.value, 'nucleo', 'r');
                   }}
-                  placeholder={props.datos.nucleo.r}
+                  placeholder={props.data.nucleo.r}
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={datos.nucleo.d}
+                  value={data.nucleo.d}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'nucleo', 'd');
+                    upload(e.target.value, 'nucleo', 'd');
                   }}
-                  placeholder={props.datos.nucleo.d}
+                  placeholder={props.data.nucleo.d}
                 />
               </td>
             </tr>
@@ -74,22 +74,22 @@ function Tabla(props) {
               <td>
                 <input
                   type="text"
-                  value={datos.manto.r}
+                  value={data.manto.r}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'manto', 'r');
+                    upload(e.target.value, 'manto', 'r');
 
                   }}
-                  placeholder={props.datos.manto.r}
+                  placeholder={props.data.manto.r}
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={datos.manto.d}
+                  value={data.manto.d}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'manto', 'd');
+                    upload(e.target.value, 'manto', 'd');
                   }}
-                  placeholder={props.datos.manto.d}
+                  placeholder={props.data.manto.d}
                 />
               </td>
             </tr>
@@ -98,21 +98,21 @@ function Tabla(props) {
               <td>
                 <input
                   type="text"
-                  value={datos.corteza.r}
+                  value={data.corteza.r}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'corteza', 'r');
+                    upload(e.target.value, 'corteza', 'r');
                   }}
-                  placeholder={props.datos.corteza.r}
+                  placeholder={props.data.corteza.r}
                 />
               </td>
               <td>
                 <input
                   type="text"
-                  value={datos.corteza.d}
+                  value={data.corteza.d}
                   onChange={(e) => {
-                    actualizar(e.target.value, 'conrteza', 'd');
+                    upload(e.target.value, 'conrteza', 'd');
                   }}
-                  placeholder={props.datos.corteza.d}
+                  placeholder={props.data.corteza.d}
                 />
               </td>
             </tr>
@@ -124,4 +124,4 @@ function Tabla(props) {
   );
 }
 
-export default Tabla;
+export default Table;

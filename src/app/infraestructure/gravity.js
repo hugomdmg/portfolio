@@ -26,7 +26,7 @@ class Gravity {
 
     calculateAxisGravity(axis, d, point1, point2, mass1, mass2) {
         if(this.type == 'planet') mass1 = 1
-        return ((-this.g * mass2 * (point1[axis] - point2[axis])) / Math.pow(d, 3/2))/mass1;
+        return ((-this.g * mass2 * (point1[axis] - point2[axis])) / Math.pow(d, 3/2));
     }
 
     calculateDistance(point1, point2) {

@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import Tabla from "./tabla";
+import Table from "./table";
 import Planets from "./planetas";
 import './styles.css'
 import Draw from "../../infraestructure/draw";
 
 export default function GalaxiesSimulation() {
   let [control, setControl] = useState(true);
-  let [v, setV] = useState(0.015);
+  let [v, setV] = useState(0.0015);
   let [angulo, setAngulo] = useState(4);
   let draw = new Draw()
 
@@ -66,19 +66,19 @@ export default function GalaxiesSimulation() {
     return (
       <div id="cuadroInicio">
         <div>
-          <Tabla
+          <Table
             nombre="1"
-            funcion={setPlaneta1}
+            setPlaneta={setPlaneta1}
             angulo={0}
             v={0}
-            datos={planeta1}
+            data={planeta1}
           />
-          <Tabla
+          <Table
             nombre="2"
-            funcion={setPlaneta2}
+            setPlaneta={setPlaneta2}
             angulo={angulo}
             v={v}
-            datos={planeta2}
+            data={planeta2}
 
           />
           <br></br>
