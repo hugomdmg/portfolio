@@ -6,20 +6,20 @@ import Draw from "../../infraestructure/draw";
 
 export default function GalaxiesSimulation() {
   let [control, setControl] = useState(true);
-  let [v, setV] = useState(0.0015);
+  let [v, setV] = useState(0.003);
   let [angulo, setAngulo] = useState(4);
   let draw = new Draw()
 
   let [planeta1, setPlaneta1] = useState({
-    nucleo: { r: 3471, d: 12.1 },
-    manto: { r: 6300, d: 3.94 },
-    corteza: { r: 6371, d: 0.12 },
+    nucleo: { r: 3500, d: 12 },
+    manto: { r: 6300, d: 4 },
+    corteza: { r: 6370, d: 1 },
     velocidad: { x: 0, y: 0 },
   });
   let [planeta2, setPlaneta2] = useState({
-    nucleo: { r: 1000, d: 0.02 },
-    manto: { r: 2500, d: 0.04 },
-    corteza: { r: 3475, d: 0.01 },
+    nucleo: { r: 1000, d: 1 },
+    manto: { r: 2500, d: 2 },
+    corteza: { r: 3500, d: 1 },
     velocidad: { x: v * Math.cos(angulo), y: v * Math.sin(angulo) },
   });
 

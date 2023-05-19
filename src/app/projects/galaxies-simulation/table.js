@@ -10,8 +10,9 @@ function Table(props) {
       corteza: { r: props.data.corteza.r, d: props.data.corteza.d },
       velocidad: props.data.velocidad
     };
+    let data2 = value ? value : 0
 
-    data1[key1][key2] = parseInt(value)
+    data1[key1][key2] = parseInt(data2)
     props.setPlaneta(data1)
   }
   let boton = () => {
@@ -110,7 +111,7 @@ function Table(props) {
                   type="text"
                   value={data.corteza.d}
                   onChange={(e) => {
-                    upload(e.target.value, 'conrteza', 'd');
+                    upload(e.target.value, 'corteza', 'd');
                   }}
                   placeholder={props.data.corteza.d}
                 />

@@ -15,7 +15,7 @@ let navLinks = [
   },
   {
     name: 'GitHub',
-    link: '',
+    link: 'https://github.com/hugomdmg/portfolio',
   },
   // {
   //   name: 'CV',
