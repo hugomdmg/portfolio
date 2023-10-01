@@ -14,9 +14,9 @@ class Gravity {
                 ay = this.calculateAxisGravity('y', d, point1, point2, mass1, mass2),
                 az = this.calculateAxisGravity('z', d, point1, point2, mass1, mass2)
 
-            point1.x += point1.vx * this.t + 0.5 * ax * Math.pow(this.t, 2)*0;
-            point1.y += point1.vy * this.t + 0.5 * ay * Math.pow(this.t, 2)*0;
-            point1.z += point1.vz * this.t + 0.5 * az * Math.pow(this.t, 2)*0;
+            point1.x += point1.vx * this.t + 0.5 * ax * Math.pow(this.t, 2);
+            point1.y += point1.vy * this.t + 0.5 * ay * Math.pow(this.t, 2);
+            point1.z += point1.vz * this.t + 0.5 * az * Math.pow(this.t, 2);
             point1.vx += ax * this.t;
             point1.vy += ay * this.t;
             point1.vz += az * this.t;

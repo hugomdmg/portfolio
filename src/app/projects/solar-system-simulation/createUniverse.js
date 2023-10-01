@@ -9,7 +9,7 @@ export default class CreateUniverse {
     draw = new Draw()
 
     planets = []
-    centerScreen = { x: 450, y: 450 }
+    centerScreen = { x: 850, y: 450 }
     sky = []
 
     constructor(planets) {
@@ -95,7 +95,7 @@ export default class CreateUniverse {
                 this.paint(this.centerScreen)
                 this.movement()
             })
-        }, 30)
+        }, 90)
     }
 }
 

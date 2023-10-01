@@ -7,6 +7,9 @@ import NasaAsteroids from "../app/projects/nasa-asteroids/nasa-asteroids";
 import SolarSystemSimulation from "../app/projects/solar-system-simulation/solar-system-simulation";
 import GalaxiesSimulation from "../app/projects/galaxies-simulation/galaxies-simulation";
 import CurrentSimulation from "../app/projects/current-simulation/App";
+import GameOfLife2 from "../app/projects/game-life-2/game-life-2";
+
+
 const projects = [
   {
     name: 'Galaxies simulation',
@@ -43,6 +46,12 @@ const projects = [
     link: 'life-1',
     description: 'Conways game of life. Each point survives one dies depending on the state of the points around it',
     component: <GameOfLife1 />
+  },
+  {
+    name: 'Game of life 2',
+    link: 'life-2',
+    description: '',
+    component: <GameOfLife2 />
   },
   {
     name: 'Arcade games',

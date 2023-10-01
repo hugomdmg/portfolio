@@ -46,7 +46,7 @@ function compareDistance(a, b) {
 function Planets(props) {
   let planetTable1 = planetTable(props.planeta1, "Galaxy 1");
   let planetTable2 = planetTable(props.planeta2, "Galaxy 2");
-  const planeta1 = galaxy.createGalaxy(props.planeta1, { x: 250, y: -100, z: 0 });
+  const planeta1 = galaxy.createGalaxy(props.planeta1, { x: 450, y: -100, z: 0 });
   const planeta2 = galaxy.createGalaxy(props.planeta2, { x: 150, y: 0, z: 0 });
   let planetas = planeta1.concat(planeta2)
 

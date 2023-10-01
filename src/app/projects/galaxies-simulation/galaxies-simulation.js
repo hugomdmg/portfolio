@@ -11,15 +11,15 @@ export default function GalaxiesSimulation() {
   let draw = new Draw()
 
   let [planeta1, setPlaneta1] = useState({
-    nucleo: { r: 3500, d: 12 },
+    nucleo: { r: 3500, d: 1200 },
     manto: { r: 6300, d: 4 },
     corteza: { r: 6370, d: 1 },
     velocidad: { x: 0, y: 0 },
   });
   let [planeta2, setPlaneta2] = useState({
-    nucleo: { r: 1000, d: 1 },
-    manto: { r: 2500, d: 2 },
-    corteza: { r: 3500, d: 1 },
+    nucleo: { r: 3500, d: 12 },
+    manto: { r: 4500, d: 4 },
+    corteza: { r: 5000, d: 1 },
     velocidad: { x: v * Math.cos(angulo), y: v * Math.sin(angulo) },
   });
 
