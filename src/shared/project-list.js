@@ -18,7 +18,7 @@ const projects = [
     component: <GalaxiesSimulation />
   },
   {
-    name: 'Solar System simulation',
+    name: 'Earth simulation',
     link: 'solar-system',
     description: 'A simulation between planets. At the moment you can see the Earth, the Moon and a third satellite orbiting the Moon',
     component: <SolarSystemSimulation />

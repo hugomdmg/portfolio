@@ -95,7 +95,7 @@ export default class CreateUniverse {
                 this.paint(this.centerScreen)
                 this.movement()
             })
-        }, 90)
+        }, 50)
     }
 }
 

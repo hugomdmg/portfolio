@@ -7,7 +7,7 @@ import Help from "../../help";
 
 let dinamics = new Dinamics()
 let gravity = new Gravity(0.000001)
-gravity.t = 6
+gravity.t = 4
 let galaxy = new Galaxy()
 let draw = new Draw()
 let helpText = 'Use W, S to rotate up and down. Use A, D to rotate left and right. Use Z, X to change time speed'
