@@ -31,23 +31,25 @@ export default function GameOfLife1() {
 
     function life() {
         setInterval(() => {
+            let cells1 = cells.map((cell) => {
+                return cell
+            })
             cells.forEach((file, index1) => {
                 file.forEach((cell, index2) => {
                     if (index1 > 1 && index1 < 48 && index2 > 1 && index2 < 28) {
                         let n = 0
-                        if (cells[index1 - 1][index2].state) n += 1
-                        if (cells[index1 + 1][index2].state) n += 1
-                        if (cells[index1][index2 - 1].state) n += 1
-                        if (cells[index1][index2 + 1].state) n += 1
-                        if (cells[index1 - 1][index2 - 1].state) n += 1
-                        if (cells[index1 + 1][index2 + 1].state) n += 1
-                        if (cells[index1 + 1][index2 - 1].state) n += 1
-                        if (cells[index1 - 1][index2 + 1].state) n += 1
+                        if (cells1[index1 - 1][index2].state) n += 1
+                        if (cells1[index1 + 1][index2].state) n += 1
+                        if (cells1[index1][index2 - 1].state) n += 1
+                        if (cells1[index1][index2 + 1].state) n += 1
+                        if (cells1[index1 - 1][index2 - 1].state) n += 1
+                        if (cells1[index1 + 1][index2 + 1].state) n += 1
+                        if (cells1[index1 + 1][index2 - 1].state) n += 1
+                        if (cells1[index1 - 1][index2 + 1].state) n += 1
 
                         if ((cell.state && n == 2) || n == 3) { cell.state = true } else {
                             cell.state = false
                         }
-
                     }
                 })
             })
@@ -67,7 +69,7 @@ export default function GameOfLife1() {
             cells.forEach((file, index1) => {
                 file.forEach((cell, index2) => {
                     let point = { x: index1 * 20, y: index2 * 20 }
-                    if (cell.state) draw.paintSquare(point, 17, 'black')
+                    if (cell.state) draw.paintSquare(point, 17, 'white')
                 })
             })
         }, [50])
