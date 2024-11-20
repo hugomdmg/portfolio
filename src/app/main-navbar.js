@@ -17,10 +17,10 @@ let navLinks = [
     name: 'GitHub',
     link: 'https://github.com/hugomdmg/portfolio',
   },
-  // {
-  //   name: 'CV',
-  //   link: 'cv',
-  // },
+  {
+    name: 'Second portfolio',
+    link: 'https://solar-system-explore.vercel.app/',
+  },
 ]
 
 
